@@ -679,3 +679,42 @@
     align-items: flex-start;
   }
 }
+
+/* FluidGlass Section */
+.fluid-glass-section {
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #040D12 0%, #183D3D 50%, #5C8374 100%);
+  border-top: 1px solid rgba(147, 177, 166, 0.2);
+  border-bottom: 1px solid rgba(147, 177, 166, 0.2);
+}
+
+.fluid-glass-section canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.fluid-glass-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.fluid-glass-placeholder h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #5C8374;
+}
+
+.fluid-glass-placeholder p {
+  font-size: 1.1rem;
+  opacity: 0.7;
+}
