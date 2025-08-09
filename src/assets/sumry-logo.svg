@@ -1,0 +1,14 @@
+<svg width="500" height="150" viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .logo-text {
+        font-family: 'Inter', 'Arial', sans-serif;
+        font-weight: 900;
+        font-size: 60px;
+        fill: black;
+      }
+    </style>
+  </defs>
+  <rect width="500" height="150" fill="white"/>
+  <text x="50" y="95" class="logo-text">Sumry.ai</text>
+</svg>
