@@ -114,6 +114,19 @@
   align-items: center;
 }
 
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-image {
+  width: 400px;
+  height: auto;
+  max-width: 100%;
+  filter: drop-shadow(0 0 20px rgba(92, 131, 116, 0.3));
+}
+
 .brand-name {
   font-size: 4rem;
   font-weight: 900;
@@ -615,6 +628,10 @@
   .hero .container {
     grid-template-columns: 1fr;
     text-align: left;
+  }
+  
+  .logo-image {
+    width: 300px;
   }
   
   .hero-title {

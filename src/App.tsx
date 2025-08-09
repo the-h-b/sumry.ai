@@ -1,41 +1,12 @@
 import './App.css'
 import { Clock, Brain, FileText, X, Target, Globe, BarChart3, CheckCircle, Ear, BookOpen, PenTool, MessageCircle, Users, User, Briefcase, GraduationCap, Microscope } from 'lucide-react'
 import TargetCursor from './components/TargetCursor'
-import MetallicPaint, { parseLogoImage } from './components/MetallicPaint'
-import { useState, useEffect } from 'react'
 import logo from './assets/sumry-logo.svg'
 
-function MetallicBrand() {
-  const [imageData, setImageData] = useState<ImageData | null>(null);
-
-  useEffect(() => {
-    async function loadDefaultImage() {
-      try {
-        const response = await fetch(logo);
-        const blob = await response.blob();
-        const file = new File([blob], "sumry-logo.svg", { type: blob.type });
-        const parsedData = await parseLogoImage(file);
-        setImageData(parsedData?.imageData ?? null);
-      } catch (err) {
-        console.error("Error loading logo image:", err);
-      }
-    }
-    loadDefaultImage();
-  }, []);
-
+function Logo() {
   return (
-    <div style={{ width: '400px', height: '100px', position: 'relative' }}>
-      <MetallicPaint 
-        imageData={imageData ?? new ImageData(1, 1)} 
-        params={{ 
-          edge: 2, 
-          patternBlur: 0.005, 
-          patternScale: 2, 
-          refraction: 0.015, 
-          speed: 0.3, 
-          liquid: 0.07 
-        }} 
-      />
+    <div className="logo-container">
+      <img src={logo} alt="Sumry.ai" className="logo-image" />
     </div>
   );
 }
@@ -43,7 +14,7 @@ function MetallicBrand() {
 function App() {
   return (
     <div className="app">
-      <TargetCursor 
+      <TargetCursor
         spinDuration={2}
         hideDefaultCursor={true}
       />
@@ -67,7 +38,7 @@ function App() {
         <div className="container">
           <div className="hero-content">
             <div className="hero-brand">
-              <MetallicBrand />
+              <Logo />
             </div>
             <h1 className="hero-title">
               The AI That Attends, Understands & Speaks For You

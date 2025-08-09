@@ -1,14 +1,30 @@
-<svg width="500" height="150" viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
   <defs>
+    <!-- Text gradient -->
+    <linearGradient id="text-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040D12"></stop>
+      <stop offset="25%" stop-color="#183D3D"></stop>
+      <stop offset="50%" stop-color="#5C8374"></stop>
+      <stop offset="75%" stop-color="#93B1A6"></stop>
+      <stop offset="100%" stop-color="#040D12"></stop>
+    </linearGradient>
+
+    <!-- Drop shadow filter -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="4" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"></feDropShadow>
+    </filter>
+
     <style>
       .logo-text {
         font-family: 'Inter', 'Arial', sans-serif;
         font-weight: 900;
-        font-size: 60px;
-        fill: black;
+        font-size: 150px; /* Increased size */
+        fill: url(#text-gradient); /* Gradient inside text */
+        filter: url(#shadow); /* Drop shadow */
       }
     </style>
   </defs>
-  <rect width="500" height="150" fill="white"/>
-  <text x="50" y="95" class="logo-text">Sumry.ai</text>
+
+  <!-- Larger gradient-filled text with shadow -->
+  <text x="-7" y="135" class="logo-text">Sumry.ai</text>
 </svg>
