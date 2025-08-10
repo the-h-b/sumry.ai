@@ -5,7 +5,6 @@ import {
   BookOpen, PenTool, MessageCircle, Users, User, Briefcase, GraduationCap, Microscope
 } from 'lucide-react'
 import TargetCursor from './components/TargetCursor'
-// import FluidGlass from './components/FluidGlass' // Temporarily disabled due to missing 3D assets
 import logo from './assets/sumry-logo.svg'
 
 function Logo() {
@@ -87,14 +86,6 @@ function App() {
           </div>
         </div>
       </section>
-
-      {/* FluidGlass Overlay Section - Temporarily disabled due to missing 3D assets
-      <section className="fluid-glass-section">
-        <div className="fluid-glass-placeholder">
-          <h3>Interactive 3D Element Coming Soon</h3>
-          <p>This section will feature an interactive 3D glass effect</p>
-        </div>
-      </section> */}
 
       {/* Solution Section */}
       <section className="solution-section">
