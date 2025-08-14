@@ -328,6 +328,7 @@
 .solution-section {
   padding: 6rem 0;
   text-align: center;
+  background: linear-gradient(135deg, rgba(8, 15, 26, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
 }
 
 .solution-description {
@@ -395,7 +396,7 @@
 /* Introducing Section */
 .introducing-section {
   padding: 6rem 0;
-  background: linear-gradient(135deg, rgba(83, 52, 131, 0.3) 0%, rgba(22, 33, 62, 0.3) 100%);
+  background: linear-gradient(135deg, rgba(12, 12, 24, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
   position: relative;
   overflow: hidden;
 }
