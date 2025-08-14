@@ -2,7 +2,7 @@
 import './App.css'
 import {
   Clock, Brain, FileText, X, Target, Globe, BarChart3, CheckCircle, Ear,
-  BookOpen, PenTool, MessageCircle, Users, User, Briefcase, GraduationCap, Microscope
+  BookOpen, PenTool, MessageCircle
 } from 'lucide-react'
 import TargetCursor from './components/TargetCursor'
 import AIAssistant3D from './components/AIAssistant3D'
