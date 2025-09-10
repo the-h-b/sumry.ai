@@ -185,15 +185,31 @@ const AIAssistant3D: React.FC<AIAssistant3DProps> = ({ className = '' }) => {
     // Start the appropriate animation based on current mode
     switch (currentMode) {
       case 'thinking':
+        // Pause orbit rotations during thinking mode
+        orbit1Rotation.current?.pause();
+        orbit2Rotation.current?.pause();
+        orbit3Rotation.current?.pause();
         thinkingAnimation.current?.play();
         break;
       case 'speaking':
+        // Resume orbit rotations for other modes
+        orbit1Rotation.current?.play();
+        orbit2Rotation.current?.play();
+        orbit3Rotation.current?.play();
         speakingAnimation.current?.play();
         break;
       case 'listening':
+        // Resume orbit rotations for other modes
+        orbit1Rotation.current?.play();
+        orbit2Rotation.current?.play();
+        orbit3Rotation.current?.play();
         listeningAnimation.current?.play();
         break;
       default:
+        // Resume orbit rotations for idle mode
+        orbit1Rotation.current?.play();
+        orbit2Rotation.current?.play();
+        orbit3Rotation.current?.play();
         idleAnimation.current?.play();
     }
   }, [currentMode]);

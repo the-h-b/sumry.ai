@@ -9,6 +9,7 @@ import TargetCursor from './components/TargetCursor'
 import AIAssistant3D from './components/AIAssistant3D'
 import ScrollAnimations from './components/ScrollAnimations'
 import AuthModal, { type AuthMode } from './components/AuthModal'
+import Dashboard from './components/Dashboard'
 import logo from './assets/sumry-logo.svg'
 
 function Logo() {
@@ -33,9 +34,19 @@ function App() {
     setCurrentUser(user)
   }
 
+  const handleLogout = () => {
+    setCurrentUser(null)
+    localStorage.removeItem('sumry_user')
+  }
+
+  // If user is logged in, show dashboard
+  if (currentUser) {
+    return <Dashboard user={currentUser} onLogout={handleLogout} />
+  }
+
   return (
     <div className="app">
-      <TargetCursor spinDuration={2} hideDefaultCursor={true} />
+      <TargetCursor spinDuration={2} hideDefaultCursor={false} />
 
       {/* Header */}
       <header className="header">
@@ -47,14 +58,10 @@ function App() {
             <a href="#features">Features</a>
             <a href="#how-it-works">How It Works</a>
             <a href="#pricing">Pricing</a>
-            {currentUser ? (
-              <span title={currentUser.email}>Hi, {currentUser.name.split(' ')[0]}</span>
-            ) : (
-              <>
-                <button className="secondary-button cursor-target" onClick={() => openAuth('login')}>Log In</button>
-                <button className="cta-button cursor-target" onClick={() => openAuth('signup')}>Sign Up</button>
-              </>
-            )}
+            <>
+              <button className="secondary-button cursor-target" onClick={() => openAuth('login')}>Log In</button>
+              <button className="cta-button cursor-target" onClick={() => openAuth('signup')}>Sign Up</button>
+            </>
           </nav>
         </div>
       </header>
@@ -199,7 +206,7 @@ function App() {
 
       {/* Animation Components */}
       <ScrollAnimations />
-      <TargetCursor />
+      {/* <TargetCursor /> */}
     </div>
   )
 }
