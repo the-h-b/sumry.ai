@@ -16,7 +16,7 @@ const AIAssistant3D: React.FC<AIAssistant3DProps> = ({ className = '' }) => {
   const [currentMode, setCurrentMode] = useState<'idle' | 'thinking' | 'speaking' | 'listening'>('idle');
 
   // Animation timelines
-  const idleAnimation = useRef<gsap.core.Timeline>(null);
+  const idleAnimation = useRef<gsap.core.Tween>(null);
   const thinkingAnimation = useRef<gsap.core.Timeline>(null);
   const speakingAnimation = useRef<gsap.core.Timeline>(null);
   const listeningAnimation = useRef<gsap.core.Timeline>(null);
@@ -151,7 +151,7 @@ const AIAssistant3D: React.FC<AIAssistant3DProps> = ({ className = '' }) => {
       }, 0);
 
     // Start with idle float
-    idleAnimation.current.play();
+    idleAnimation.current?.play();
 
     // Cycle through different modes
     const modeInterval = setInterval(() => {

@@ -6,7 +6,6 @@ import {
   Settings, 
   LogOut,
   Home,
-  Calendar,
   BarChart3,
   Clock,
   Users,
