@@ -16,10 +16,10 @@ const AIAssistant3D: React.FC<AIAssistant3DProps> = ({ className = '' }) => {
   const [currentMode, setCurrentMode] = useState<'idle' | 'thinking' | 'speaking' | 'listening'>('idle');
 
   // Animation timelines
-  const idleAnimation = useRef<gsap.core.Timeline>();
-  const thinkingAnimation = useRef<gsap.core.Timeline>();
-  const speakingAnimation = useRef<gsap.core.Timeline>();
-  const listeningAnimation = useRef<gsap.core.Timeline>();
+  const idleAnimation = useRef<gsap.core.Timeline | null>(null);
+  const thinkingAnimation = useRef<gsap.core.Timeline | null>(null);
+  const speakingAnimation = useRef<gsap.core.Timeline | null>(null);
+  const listeningAnimation = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
     if (!containerRef.current || !coreRef.current || !orbitsRef.current) return;
