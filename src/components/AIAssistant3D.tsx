@@ -20,6 +20,11 @@ const AIAssistant3D: React.FC<AIAssistant3DProps> = ({ className = '' }) => {
   const thinkingAnimation = useRef<gsap.core.Timeline>(null);
   const speakingAnimation = useRef<gsap.core.Timeline>(null);
   const listeningAnimation = useRef<gsap.core.Timeline>(null);
+  const coreRotation = useRef<gsap.core.Tween>(null);
+  const orbit1Rotation = useRef<gsap.core.Tween>(null);
+  const orbit2Rotation = useRef<gsap.core.Tween>(null);
+  const orbit3Rotation = useRef<gsap.core.Tween>(null);
+  const precessionAnimation = useRef<gsap.core.Timeline>(null);
 
   useEffect(() => {
     if (!containerRef.current || !coreRef.current || !orbitsRef.current) return;
@@ -53,57 +58,76 @@ const AIAssistant3D: React.FC<AIAssistant3DProps> = ({ className = '' }) => {
       transformStyle: 'preserve-3d'
     });
 
-    // Idle animation - gentle floating and rotation
-    idleAnimation.current = gsap.timeline({ repeat: -1, yoyo: true })
-      .to(core, {
-        rotationY: 360,
-        duration: 8,
-        ease: 'none'
-      }, 0)
-      .to(core, {
-        y: -10,
-        duration: 3,
-        ease: 'power2.inOut'
-      }, 0)
+    // Continuous core rotation (additive to avoid resets)
+    coreRotation.current = gsap.to(core, {
+      rotationY: '+=360',
+      duration: 12,
+      ease: 'none',
+      repeat: -1
+    });
+
+    // Idle float (separate from rotation to avoid yoyo resetting angles)
+    idleAnimation.current = gsap.to(core, {
+      y: -6,
+      duration: 3.5,
+      ease: 'sine.inOut',
+      yoyo: true,
+      repeat: -1
+    });
+
+    // Continuous orbit rotations at varied speeds for depth
+    orbit1Rotation.current = gsap.to('.ai-orbit.orbit-1', {
+      rotationY: '+=360',
+      duration: 12,
+      ease: 'none',
+      repeat: -1
+    });
+
+    orbit2Rotation.current = gsap.to('.ai-orbit.orbit-2', {
+      rotationY: '-=360',
+      duration: 18,
+      ease: 'none',
+      repeat: -1
+    });
+
+    orbit3Rotation.current = gsap.to('.ai-orbit.orbit-3', {
+      rotationY: '+=360',
+      duration: 24,
+      ease: 'none',
+      repeat: -1
+    });
+
+    // Gentle precession for the orbits container
+    precessionAnimation.current = gsap.timeline({ repeat: -1, yoyo: true })
       .to(orbits, {
-        rotationX: 15,
-        rotationZ: 10,
-        duration: 4,
-        ease: 'power2.inOut'
-      }, 0);
+        rotationX: 10,
+        rotationZ: 8,
+        duration: 6,
+        ease: 'sine.inOut'
+      })
+      .to(orbits, {
+        rotationX: -6,
+        rotationZ: -5,
+        duration: 6,
+        ease: 'sine.inOut'
+      });
 
     // Thinking animation - faster rotation with pulsing
     thinkingAnimation.current = gsap.timeline({ repeat: -1, paused: true })
-      .to(core, {
-        rotationY: 360,
-        duration: 2,
-        ease: 'none'
-      }, 0)
-      .to(core, {
-        scale: 1.1,
-        duration: 0.5,
-        yoyo: true,
-        repeat: -1,
-        ease: 'power2.inOut'
-      }, 0)
       .to(orbits, {
-        rotationX: 360,
-        rotationZ: 180,
+        rotationX: '+=360',
+        rotationY: '+=360',
+        rotationZ: '+=360',
         duration: 3,
-        ease: 'power2.inOut'
+        ease: 'power2.inOut',
+        overwrite: 'auto',
+        immediateRender: false
       }, 0);
 
     // Speaking animation - rhythmic pulsing
     speakingAnimation.current = gsap.timeline({ repeat: -1, paused: true })
-      .to(core, {
-        scale: 1.2,
-        duration: 0.3,
-        yoyo: true,
-        repeat: -1,
-        ease: 'power2.inOut'
-      }, 0)
       .to(orbits, {
-        rotationY: 360,
+        rotationY: '+=360',
         duration: 4,
         ease: 'none'
       }, 0);
@@ -126,7 +150,7 @@ const AIAssistant3D: React.FC<AIAssistant3DProps> = ({ className = '' }) => {
         ease: 'sine.inOut'
       }, 0);
 
-    // Start with idle animation
+    // Start with idle float
     idleAnimation.current.play();
 
     // Cycle through different modes
@@ -140,9 +164,14 @@ const AIAssistant3D: React.FC<AIAssistant3DProps> = ({ className = '' }) => {
     return () => {
       clearInterval(modeInterval);
       idleAnimation.current?.kill();
+      coreRotation.current?.kill();
       thinkingAnimation.current?.kill();
       speakingAnimation.current?.kill();
       listeningAnimation.current?.kill();
+      orbit1Rotation.current?.kill();
+      orbit2Rotation.current?.kill();
+      orbit3Rotation.current?.kill();
+      precessionAnimation.current?.kill();
     };
   }, []);
 

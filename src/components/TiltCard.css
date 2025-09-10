@@ -1,0 +1,29 @@
+.tilt-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  /* let height be defined by content */
+  transform-style: preserve-3d;
+  will-change: transform;
+  touch-action: manipulation;
+  overflow: visible; /* allow shadow to render */
+}
+
+.tilt-inner {
+  position: relative;
+  width: 100%;
+  /* auto height so content defines size */
+  border-radius: inherit; /* use card's own radius */
+  /* Do NOT set background/backdrop here to avoid overriding card styles */
+  transform: perspective(900px) rotateX(0deg) rotateY(0deg) scale(1);
+}
+
+.tilt-glare {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  mix-blend-mode: screen;
+}

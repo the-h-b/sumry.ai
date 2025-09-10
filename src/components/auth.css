@@ -1,0 +1,98 @@
+/* Minimal styles to make AuthModal visible and centered */
+.auth-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.auth-modal {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(13, 18, 23, 0.95);
+  border: 1px solid rgba(147,177,166,0.25);
+  border-radius: 12px;
+  padding: 1.25rem;
+  color: #fff;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.auth-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.auth-close {
+  appearance: none;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+}
+
+.auth-tab.active {
+  background: linear-gradient(135deg, #5C8374 0%, #93B1A6 100%);
+  color: #fff;
+  border-color: transparent;
+}
+
+.auth-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.auth-form label span {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+  color: rgba(255,255,255,0.85);
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+}
+
+.auth-error {
+  color: #ffb4b4;
+  background: rgba(255, 0, 0, 0.12);
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+}
+
+.primary-button.full {
+  width: 100%;
+}
+
+.auth-hint {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  margin-top: 0.25rem;
+}

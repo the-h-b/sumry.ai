@@ -1,4 +1,5 @@
 
+import { useState } from 'react'
 import './App.css'
 import {
   Clock, Brain, FileText, X, Target, Globe, BarChart3, CheckCircle, Ear,
@@ -7,6 +8,7 @@ import {
 import TargetCursor from './components/TargetCursor'
 import AIAssistant3D from './components/AIAssistant3D'
 import ScrollAnimations from './components/ScrollAnimations'
+import AuthModal, { type AuthMode } from './components/AuthModal'
 import logo from './assets/sumry-logo.svg'
 
 function Logo() {
@@ -18,6 +20,19 @@ function Logo() {
 }
 
 function App() {
+  const [authOpen, setAuthOpen] = useState(false)
+  const [authMode, setAuthMode] = useState<AuthMode>('signup')
+  const [currentUser, setCurrentUser] = useState<{ name: string; email: string; phone: string } | null>(null)
+
+  const openAuth = (mode: AuthMode) => {
+    setAuthMode(mode)
+    setAuthOpen(true)
+  }
+
+  const handleAuthSuccess = (user: { name: string; email: string; phone: string }) => {
+    setCurrentUser(user)
+  }
+
   return (
     <div className="app">
       <TargetCursor spinDuration={2} hideDefaultCursor={true} />
@@ -32,7 +47,14 @@ function App() {
             <a href="#features">Features</a>
             <a href="#how-it-works">How It Works</a>
             <a href="#pricing">Pricing</a>
-            <button className="cta-button cursor-target">Get Started</button>
+            {currentUser ? (
+              <span title={currentUser.email}>Hi, {currentUser.name.split(' ')[0]}</span>
+            ) : (
+              <>
+                <button className="secondary-button cursor-target" onClick={() => openAuth('login')}>Log In</button>
+                <button className="cta-button cursor-target" onClick={() => openAuth('signup')}>Sign Up</button>
+              </>
+            )}
           </nav>
         </div>
       </header>
@@ -50,8 +72,8 @@ function App() {
               In today's fast-paced work environment, meetings have become a time sink. You're expected to be everywhere at once, but the reality is you attend dozens of calls each week, miss critical details, struggle to capture notes, and often forget important follow-ups.
             </p>
             <div className="hero-cta">
-              <button className="primary-button cursor-target">Start Free Trial</button>
-              <button className="secondary-button cursor-target">Watch Demo</button>
+              <button className="primary-button cursor-target" onClick={() => openAuth('signup')}>Start Free Trial</button>
+              <button className="secondary-button cursor-target" onClick={() => openAuth('login')}>Log In</button>
             </div>
           </div>
           <div className="hero-visual">
@@ -125,8 +147,8 @@ function App() {
             <h2>Ready to reclaim your time?</h2>
             <p>Join thousands of professionals who've already made meetings work for them, not against them.</p>
             <div className="cta-buttons">
-              <button className="primary-button large cursor-target">Start Your Free Trial</button>
-              <button className="secondary-button large cursor-target">Schedule a Demo</button>
+              <button className="primary-button large cursor-target" onClick={() => openAuth('signup')}>Start Your Free Trial</button>
+              <button className="secondary-button large cursor-target" onClick={() => openAuth('login')}>Log In</button>
             </div>
           </div>
         </div>
@@ -167,6 +189,14 @@ function App() {
         </div>
       </footer>
       
+      {/* Auth Modal */}
+      <AuthModal
+        open={authOpen}
+        mode={authMode}
+        onClose={() => setAuthOpen(false)}
+        onSuccess={handleAuthSuccess}
+      />
+
       {/* Animation Components */}
       <ScrollAnimations />
       <TargetCursor />
